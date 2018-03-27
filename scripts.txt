@@ -1,0 +1,110 @@
+2nf
+
+create View `2nfView_driverstable` As select
+championship.drivernf1.`Pos.` As `Pos.`,
+championship.drivernf1.DriverName As 	DriverName,
+championship.drivernf1.DriverSurname As	DriverSurname,
+championship.drivernf1.`Points driver` As	`Points driver`,
+championship.drivernf1.Constructor as	Constructor,
+championship.drivernf1.`Year` as	`Year` from
+
+ championship.drivernf1;
+ 
+ Select * from `2nfView_driverstable`;
+
+Constructor	Points Constructors	Pos. Constructors	ConstructorsCountry
+
+
+
+ create View `2nfView_constructorstable` As select
+championship.drivernf1.ConstructorsCountry As ConstructorsCountry,
+championship.drivernf1.Constructor As 	Constructor,
+championship.drivernf1.`Pos. Constructors` As	`Pos. Constructors`,
+championship.drivernf1.`Points Constructors` as	 `Points Constructors`,
+championship.drivernf1.`Year` as	`Year` from
+
+ championship.drivernf1;
+ 
+ Select * from `2nfView_constructorstable`;
+
+
+ create View `2nfView_drivers` As select
+championship.drivernf1.DriverName As DriverName,
+championship.drivernf1.DriverSurname As 	DriverSurname,
+championship.drivernf1.DriverCountry As	DriverCountry
+ from
+
+ championship.drivernf1;
+ 
+ Select * from `2nfView_constructorstable`;
+
+
+
+ 3nf
+
+create View `3nfView_driverstable` As select
+`Pos.` As `Pos.`,
+CONCAT(DriverName,DriverSurname) As 	DriverId,
+`Points driver` As	`Points driver`,
+Constructor as	Constructor,
+
+`Year` as	`Year` from
+
+ championship.`2nfView_driverstable`;
+
+ create View `3nfView_constructorstable` As select
+ConstructorsCountry As ConstructorsCountry,
+Constructor As 	Constructor,
+`Pos. Constructors` As	`Pos. Constructors`,
+`Points Constructors` as	`Points Constructors`,
+`Year` as	`Year` from
+
+ championship.2nfview_constructorstable;
+ 
+ Select * from `3nfView_constructorstable`;
+
+ create View `3nfView_drivers` As select
+CONCAT(DriverName,DriverSurname) As 	DriverId,
+DriverCountry As	DriverCountry
+ from
+
+ championship.2nfview_drivers;
+ 
+ Select * from `3nfView_constructorstable`;
+
+
+ task3
+
+create tables 
+create table `3nfTable_driverstable` As select
+`Pos.` As `Pos.`,
+DriverId As 	DriverId,
+`Points driver` As	`Points driver`,
+Constructor as	Constructor,
+
+`Year` as	`Year` from
+
+ championship.`3nfView_driverstable`;
+
+ create table `3nfTable_constructorstable` As select
+ConstructorsCountry As ConstructorsCountry,
+Constructor As 	Constructor,
+`Pos. Constructors` As	`Pos. Constructors`,
+`Points Constructors` as	`Points Constructors`,
+`Year` as	`Year` from
+
+ championship.3nfview_constructorstable;
+ 
+ Select * from `3nfTable_constructorstable`;
+
+ create table `3nfTable_drivers` As select
+DriverId As 	DriverId,
+DriverCountry As	DriverCountry
+ from
+
+ championship.3nfview_drivers;
+ 
+ Select * from `3nfTable_constructorstable`;
+
+
+ 
